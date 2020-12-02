@@ -30,8 +30,7 @@ module Apple
             {
               applinks: {
                 apps: @apps,
-                details: @details,
-                webcredentials: @webcredentials
+                details: @details
               }
             }.to_json
           end
