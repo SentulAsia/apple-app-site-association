@@ -11,6 +11,7 @@ module Apple
           def initialize
             @apps = []
             @details = []
+            @webcredentials = {}
           end
 
           def apps(*a)
@@ -21,11 +22,16 @@ module Apple
             @details.push(*d)
           end
 
+          def webcredentials(hash)
+            @webcredentials.merge!(hash)
+          end
+
           def to_json
             {
               applinks: {
                 apps: @apps,
-                details: @details
+                details: @details,
+                webcredentials: @webcredentials
               }
             }.to_json
           end
@@ -41,6 +47,8 @@ module Apple
 
         get '/apple-app-site-association' do
           content_type :json
+          cache_control :public, :must_revalidate
+          status 200
           self.class.config.to_json
         end
       end
