@@ -46,7 +46,7 @@ module Apple
         end
 
         get '/apple-app-site-association' do
-          content_type :json
+          content_type :pkcs7-mime
           cache_control :public, :must_revalidate
           status 200
           self.class.config.to_json
